@@ -11,6 +11,7 @@
     public class VentaCreateDto
     {
         public int IdCliente { get; set; }
-        public int IdArticuloTienda { get; set; }
+        public int IdTienda { get; set; }
+        public List<int> IdArticulo { get; set; }
     }
 }

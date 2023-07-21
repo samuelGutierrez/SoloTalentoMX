@@ -5,6 +5,6 @@ namespace SoloTalentoMX.Api.BussinessLogic.Interfaces
 {
     public interface IClienteArticuloServices
     {
-        Task<ReturnWebApi> Venta(List<VentaCreateDto> dto);
+        Task<ReturnWebApi> Venta(VentaCreateDto dto);
     }
 }

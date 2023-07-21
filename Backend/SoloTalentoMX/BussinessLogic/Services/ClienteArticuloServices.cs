@@ -11,24 +11,27 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
     public class ClienteArticuloServices : IClienteArticuloServices
     {
         private readonly IGeneric<ClienteArticulo> _igClienteArticulo;
+        private readonly IGeneric<ArticuloTienda> _igArticuloTienda;
 
-        public ClienteArticuloServices(IGeneric<ClienteArticulo> igClienteArticulo)
+        public ClienteArticuloServices(IGeneric<ClienteArticulo> igClienteArticulo, IGeneric<ArticuloTienda> igArticuloTienda)
         {
             _igClienteArticulo = igClienteArticulo;
+            _igArticuloTienda = igArticuloTienda;
         }
 
-        public async Task<ReturnWebApi> Venta(List<VentaCreateDto> dto)
+        public async Task<ReturnWebApi> Venta(VentaCreateDto dto)
         {
             try
             {
                 List<ClienteArticulo> listaVentas = new List<ClienteArticulo>();
 
-                for (int i = 0; i < dto.Count; i++)
+                for (int i = 0; i < dto.IdArticulo.Count; i++)
                 {
+                    var articuloTienda = _igArticuloTienda.Search(x => x.IdTienda == dto.IdTienda && x.IdArticulo == dto.IdArticulo[i]).Id;
                     var saveData = new ClienteArticulo()
                     {
-                        IdCliente = dto[i].IdCliente,
-                        IdArticuloTienda = dto[i].IdArticuloTienda,
+                        IdCliente = dto.IdCliente,
+                        IdArticuloTienda = articuloTienda,
                         Date = DateTime.Now
                     };
 
