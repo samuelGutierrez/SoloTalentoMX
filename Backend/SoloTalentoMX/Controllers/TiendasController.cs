@@ -10,16 +10,32 @@ namespace SoloTalentoMX.Api.Controllers
     public class TiendasController : ControllerBase
     {
         private readonly ITiendasServices _iTiendasServices;
+        private readonly IArticulosTiendaService _iArticulosTiendaServices;
+        private readonly IClienteArticuloServices _iClienteArticulosTiendaServices;
 
-        public TiendasController(ITiendasServices iTiendasServices)
+        public TiendasController(ITiendasServices iTiendasServices, IArticulosTiendaService iArticulosTiendaServices, IClienteArticuloServices iClienteArticulosTiendaServices)
         {
             _iTiendasServices = iTiendasServices;
+            _iArticulosTiendaServices = iArticulosTiendaServices;
+            _iClienteArticulosTiendaServices = iClienteArticulosTiendaServices;
         }
 
         [HttpPost("RegistrarTiendas")]
         public async Task<ReturnWebApi> RegistrarTienda([FromBody] TiendasCreateDto dto)
         {
             return await _iTiendasServices.RegistrarTienda(dto);
+        }
+
+        [HttpPost("AbastecerTienda")]
+        public async Task<ReturnWebApi> AbastecerTienda([FromBody] ArticulosTiendaCreateDto dto)
+        {
+            return await _iArticulosTiendaServices.AbastecerTienda(dto);
+        }
+
+        [HttpPost("Venta")]
+        public async Task<ReturnWebApi> VentaTienda([FromBody] List<VentaCreateDto> dto)
+        {
+            return await _iClienteArticulosTiendaServices.Venta(dto);
         }
     }
 }
