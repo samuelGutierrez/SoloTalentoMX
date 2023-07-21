@@ -43,12 +43,12 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
                     };
 
                     if (await _iUsuariosServices.CrearUsuario(saveDataUsuario))
-                        return new ReturnWebApi<Clientes>(Enumerations.eMessagesClient.Guardado, Enumerations.eResponse.Success);
-                    return new ReturnWebApi<Clientes>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
+                        return new ReturnWebApi<Administradores>(Enumerations.eMessagesClient.Guardado, Enumerations.eResponse.Success);
+                    return new ReturnWebApi<Administradores>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
                 }
-                return new ReturnWebApi<Clientes>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
+                return new ReturnWebApi<Administradores>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
             }
-            catch (CustomExceptions ex) { return new ReturnWebApi<Clientes>(ex.CodeMessageClient, ex.Response, ex.Tags); }
+            catch (CustomExceptions ex) { return new ReturnWebApi<Administradores>(ex.CodeMessageClient, ex.Response, ex.Tags); }
         }
     }
 }
