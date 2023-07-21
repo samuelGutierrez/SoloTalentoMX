@@ -12,7 +12,7 @@ using SoloTalentoMX.Data.Data;
 namespace SoloTalentoMX.Entity.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230721072052_ModifyTiendas")]
+    [Migration("20230721072634_ModifyTiendas")]
     partial class ModifyTiendas
     {
         /// <inheritdoc />
