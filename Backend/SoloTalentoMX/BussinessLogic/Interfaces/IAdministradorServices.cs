@@ -3,9 +3,8 @@ using SoloTalentoMX.Api.BussinessLogic.Utility;
 
 namespace SoloTalentoMX.Api.BussinessLogic.Interfaces
 {
-    public interface IClientesServices
+    public interface IAdministradorServices
     {
-        Task<ReturnWebApi> RegistrarUsuario(ClientesCreateDto dto);
-        Task<List<ClientesDto>> ListaClientes();
+        Task<ReturnWebApi> RegistrarAdministrador(AdministradoresCreateDto dto);
     }
 }

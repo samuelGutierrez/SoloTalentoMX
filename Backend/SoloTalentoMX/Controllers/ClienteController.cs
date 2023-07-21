@@ -21,5 +21,11 @@ namespace SoloTalentoMX.Api.Controllers
         {
             return await _iClientesServices.RegistrarUsuario(dto);
         }
+
+        [HttpGet("ListaClientes")]
+        public async Task<List<ClientesDto>> ListaClientes()
+        {
+            return await _iClientesServices.ListaClientes();
+        }
     }
 }
