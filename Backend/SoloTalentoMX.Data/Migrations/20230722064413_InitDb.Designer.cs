@@ -9,10 +9,10 @@ using SoloTalentoMX.Data.Data;
 
 #nullable disable
 
-namespace SoloTalentoMX.Entity.Migrations
+namespace SoloTalentoMX.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230721034248_InitDb")]
+    [Migration("20230722064413_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -70,6 +70,9 @@ namespace SoloTalentoMX.Entity.Migrations
                     b.Property<int>("IdTienda")
                         .HasColumnType("int");
 
+                    b.Property<int>("StockTienda")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ClientesId");
@@ -101,7 +104,7 @@ namespace SoloTalentoMX.Entity.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Precion")
+                    b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Stock")
@@ -119,6 +122,9 @@ namespace SoloTalentoMX.Entity.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CantidadCompra")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");

@@ -8,7 +8,7 @@ using SoloTalentoMX.Data.Data;
 
 #nullable disable
 
-namespace SoloTalentoMX.Entity.Migrations
+namespace SoloTalentoMX.Data.Migrations
 {
     [DbContext(typeof(Context))]
     partial class ContextModelSnapshot : ModelSnapshot
