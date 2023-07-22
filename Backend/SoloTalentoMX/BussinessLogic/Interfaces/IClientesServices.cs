@@ -6,5 +6,6 @@ namespace SoloTalentoMX.Api.BussinessLogic.Interfaces
     public interface IClientesServices
     {
         Task<ReturnWebApi> RegistrarUsuario(ClientesCreateDto dto);
+        Task<List<ClientesDto>> ListaClientes();
     }
 }

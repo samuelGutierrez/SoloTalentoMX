@@ -11,6 +11,7 @@ namespace SoloTalentoMX.Data.Domain
         public int IdCliente { get; set; }
         public int IdArticuloTienda { get; set; }
         public DateTime Date { get; set; }
+        public int CantidadCompra { get; set; }
 
         [ForeignKey("IdCliente")]
         public virtual Clientes Clientes { get; set; }

@@ -1,0 +1,44 @@
+<div class="parent-user">
+
+  <section class="navBar-user">
+    <select name="cars" id="cars" (change)="onTiendaSeleccionadaChange($event)">
+      <option *ngFor="let tienda of proyecto.tiendas" [value]="tienda.idTienda">{{ tienda.nombreTienda }}</option>
+    </select>
+    <div>
+      <img src="../../assets/images/carrito.png" (click)="mostrarCarrito = true" />
+      <span class="carrito-counter">{{ carrito.length }}</span>
+    </div>
+  </section>
+
+  <section class="parent-section-cards">
+    <ng-container *ngIf="tiendaSeleccionadaId !== null">
+
+      <div *ngFor="let tienda of proyecto.tiendas">
+
+        <div class="parent-cards" *ngIf="tienda.idTienda === tiendaSeleccionadaId">
+
+          <div class="card" *ngFor="let product of tienda.productos">
+            <img [src]="product.image" alt="{{ product.name }}" />
+            <h3>{{ product.name }}</h3>
+            <p>Precio: ${{ product.price }}</p>
+            <button (click)="agregarAlCarrito(product.id)">Añadir</button>
+          </div>
+
+        </div>
+
+      </div>
+    </ng-container>
+  </section>
+
+  <div *ngIf="mostrarCarrito" class="modal">
+    <div class="modal-content">
+      <h2>Carrito de compras</h2>
+      <div *ngFor="let item of carrito">
+        <p>{{ item.name }} - Cantidad: {{ item.cantidad }} - Subtotal: ${{ item.price * item.cantidad }}</p>
+      </div>
+      <p>Total: ${{ calcularTotalCarrito() }}</p>
+      <button (click)="mostrarCarrito = false">Cerrar</button>
+    </div>
+  </div>
+
+</div>
