@@ -2,6 +2,7 @@
 using SoloTalentoMX.Api.BussinessLogic.Interfaces;
 using SoloTalentoMX.Data.Domain;
 using SoloTalentoMX.Data.Interfaces;
+using SoloTalentoMX.Data.Utility;
 
 namespace SoloTalentoMX.Api.BussinessLogic.Services
 {
@@ -35,6 +36,15 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
 
             }
             catch (Exception ex) { throw ex; }
+        }
+
+        public async Task<Usuarios> ObtenerUsuario(UsuarioLoginDto login)
+        {
+            try
+            {
+                return await _igUsuarios.SearchAsync(x => x.Correo == login.Correo && x.Password == login.Password);
+            }
+            catch (CustomExceptions) { throw; }
         }
     }
 }
