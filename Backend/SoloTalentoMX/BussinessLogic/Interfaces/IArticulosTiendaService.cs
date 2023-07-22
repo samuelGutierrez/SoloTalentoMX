@@ -5,6 +5,6 @@ namespace SoloTalentoMX.Api.BussinessLogic.Interfaces
 {
     public interface IArticulosTiendaService
     {
-        Task<ReturnWebApi> AbastecerTienda(ArticulosTiendaCreateDto dto);
+        //Task<ReturnWebApi> AbastecerTienda(ArticulosTiendaCreateDto dto);
     }
 }

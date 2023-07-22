@@ -18,34 +18,34 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
             _igArticulos = igArticulos;
         }
 
-        public async Task<ReturnWebApi> AbastecerTienda(ArticulosTiendaCreateDto dto)
-        {
-            try
-            {
-                var saveData = new ArticuloTienda
-                {
-                    IdArticulo = dto.IdArticulo,
-                    IdTienda = dto.IdTienda,
-                    StockTienda = dto.StockTienda,
-                    Date = DateTime.Now
-                };
+        //public async Task<ReturnWebApi> AbastecerTienda(ArticulosTiendaCreateDto dto)
+        //{
+        //    try
+        //    {
+        //        var saveData = new ArticuloTienda
+        //        {
+        //            IdArticulo = dto.IdArticulo,
+        //            IdTienda = dto.IdTienda,
+        //            StockTienda = dto.StockTienda,
+        //            Date = DateTime.Now
+        //        };
 
-                //Actualizar el stock del articulo para abastecer la tienda
-                var currentArticulo = _igArticulos.Search(x => x.Id == dto.IdArticulo);
+        //        //Actualizar el stock del articulo para abastecer la tienda
+        //        var currentArticulo = _igArticulos.Search(x => x.Id == dto.IdArticulo);
 
-                if ((currentArticulo.Stock -= dto.StockTienda) < 0)
-                    return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoAbastecioTienda, Enumerations.eResponse.Error);
-                else
-                {
-                    var exitoso = await _igArticuloTienda.CreateAsync(saveData);
-                    _igArticulos.Modify(currentArticulo);
+        //        if ((currentArticulo.Stock -= dto.StockTienda) < 0)
+        //            return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoAbastecioTienda, Enumerations.eResponse.Error);
+        //        else
+        //        {
+        //            var exitoso = await _igArticuloTienda.CreateAsync(saveData);
+        //            _igArticulos.Modify(currentArticulo);
 
-                    if (exitoso != null)
-                        return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.Guardado, Enumerations.eResponse.Success);
-                    return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
-                }
-            }
-            catch (CustomExceptions ex) { return new ReturnWebApi<ArticuloTienda>(ex.CodeMessageClient, ex.Response, ex.Tags); }
-        }
+        //            if (exitoso != null)
+        //                return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.Guardado, Enumerations.eResponse.Success);
+        //            return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
+        //        }
+        //    }
+        //    catch (CustomExceptions ex) { return new ReturnWebApi<ArticuloTienda>(ex.CodeMessageClient, ex.Response, ex.Tags); }
+        //}
     }
 }

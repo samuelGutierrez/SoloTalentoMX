@@ -31,7 +31,8 @@ namespace SoloTalentoMX.Api.Controllers
         [HttpPost("AbastecerTienda")]
         public async Task<ReturnWebApi> AbastecerTienda([FromBody] ArticulosTiendaCreateDto dto)
         {
-            return await _iArticulosTiendaServices.AbastecerTienda(dto);
+            //return await _iArticulosTiendaServices.AbastecerTienda(dto);
+            return null;
         }
 
         [HttpPost("Venta")]
