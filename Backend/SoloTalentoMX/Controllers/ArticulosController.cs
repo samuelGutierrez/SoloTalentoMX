@@ -23,5 +23,18 @@ namespace SoloTalentoMX.Api.Controllers
         {
             return await _iArticulosServices.RegistrarArticulos(dto);
         }
+
+        [HttpPut("ActualizarArticulo/{id}")]
+        public async Task<ReturnWebApi> ActualizarArticulo([FromBody] ArticulasUpdateDto updateDto, int id)
+        {
+            return await _iArticulosServices.ActualizarArticulo(updateDto, id);
+        }
+
+        [HttpDelete("EliminarArticulo/{id}")]
+        public async Task<ReturnWebApi> EliminarArticulo(int id)
+        {
+            return await _iArticulosServices.EliminarArticulo(id);
+        }
+
     }
 }

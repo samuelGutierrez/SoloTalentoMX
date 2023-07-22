@@ -18,34 +18,40 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
             _igArticulos = igArticulos;
         }
 
-        //public async Task<ReturnWebApi> AbastecerTienda(ArticulosTiendaCreateDto dto)
-        //{
-        //    try
-        //    {
-        //        var saveData = new ArticuloTienda
-        //        {
-        //            IdArticulo = dto.IdArticulo,
-        //            IdTienda = dto.IdTienda,
-        //            StockTienda = dto.StockTienda,
-        //            Date = DateTime.Now
-        //        };
+        public async Task<ReturnWebApi> AbastecerTienda(ArticulosTiendaCreateDto dto)
+        {
+            try
+            {
+                List<ArticuloTienda> listaArticuloTiendas = new List<ArticuloTienda>();
 
-        //        //Actualizar el stock del articulo para abastecer la tienda
-        //        var currentArticulo = _igArticulos.Search(x => x.Id == dto.IdArticulo);
+                for (int i = 0; i < dto.Articulos.Count; i++)
+                {
+                    var saveData = new ArticuloTienda
+                    {
+                        IdArticulo = dto.Articulos[i].IdArticulo,
+                        IdTienda = dto.IdTienda,
+                        StockTienda = dto.Articulos[i].StockTienda,
+                        Date = DateTime.Now
+                    };
 
-        //        if ((currentArticulo.Stock -= dto.StockTienda) < 0)
-        //            return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoAbastecioTienda, Enumerations.eResponse.Error);
-        //        else
-        //        {
-        //            var exitoso = await _igArticuloTienda.CreateAsync(saveData);
-        //            _igArticulos.Modify(currentArticulo);
+                    //Actualizar el stock del articulo para abastecer la tienda
+                    var currentArticulo = _igArticulos.Search(x => x.Id == dto.Articulos[i].IdArticulo);
 
-        //            if (exitoso != null)
-        //                return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.Guardado, Enumerations.eResponse.Success);
-        //            return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
-        //        }
-        //    }
-        //    catch (CustomExceptions ex) { return new ReturnWebApi<ArticuloTienda>(ex.CodeMessageClient, ex.Response, ex.Tags); }
-        //}
+                    if ((currentArticulo.Stock -= dto.Articulos[i].StockTienda) < 0)
+                        return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoAbastecioTienda, Enumerations.eResponse.Error);
+                    else
+                    {
+                        var exitoso = await _igArticuloTienda.CreateAsync(saveData);
+                        _igArticulos.Modify(currentArticulo);
+
+                        if (exitoso != null)
+                            return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.Guardado, Enumerations.eResponse.Success);
+                        return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
+                    }
+                }
+                return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoGuardado, Enumerations.eResponse.Warning);
+            }
+            catch (CustomExceptions ex) { return new ReturnWebApi<ArticuloTienda>(ex.CodeMessageClient, ex.Response, ex.Tags); }
+        }
     }
 }

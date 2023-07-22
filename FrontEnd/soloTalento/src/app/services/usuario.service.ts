@@ -14,4 +14,6 @@ export class UsuarioService {
     GetUserRol(idUser: number) {
         return this.http.get<any>(`${this.baseUrl}/ObtenerUsuario/${idUser}`);
     }
+
+
 } 
