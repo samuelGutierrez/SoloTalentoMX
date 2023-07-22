@@ -1,0 +1,49 @@
+.parent-body-login
+  position: relative
+  min-height: 300px
+  background-image: url('../../assets/images/market.jpg')
+  background-size: cover
+  background-position: center
+  color: #ffffff
+  font-size: 16px
+  width: 100vw
+  height: 100vh
+  justify-content: center
+  display: flex
+  align-items: center
+  .parent-card-login
+    display: grid
+    grid-template-columns: 2fr 1fr
+    max-width: 800px
+    box-shadow: 1px 2px 20px 3px #232020cf
+    .login-section
+      height: auto
+      padding: 20px
+      display: grid
+      align-items: center
+      grid-template-rows: repeat(3,1fr)
+      // height: calc(100vh - 426px)
+      background-color: white
+      color: black
+      a
+        text-decoration: none
+        color: #bebeea
+      form
+        input
+          margin-bottom: 22px
+          border: 0
+          border-bottom: 3px solid #bebeea
+          outline: none
+        button
+          border: 0
+          padding: 8px
+          border-radius: 5px
+          background-color: #bebeea
+          cursor: pointer
+        button:active
+            background-color: #a1a1e3
+  .figure-login
+    margin: 0
+    img
+      width: 100%
+      height: 100%
