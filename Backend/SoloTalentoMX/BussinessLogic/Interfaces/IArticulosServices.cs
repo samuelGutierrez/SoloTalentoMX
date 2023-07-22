@@ -8,6 +8,7 @@ namespace SoloTalentoMX.Api.BussinessLogic.Interfaces
         Task<ReturnWebApi> RegistrarArticulos(ArticulosCreateDto dto);
         Task<List<ArticulosDto>> ListaArticulos();
         Task<ArticulosDto> ObtenerArticuloxId(int id);
-
+        Task<ReturnWebApi> ActualizarArticulo(ArticulasUpdateDto updateDto, int id);
+        Task<ReturnWebApi> EliminarArticulo(int id);
     }
 }
