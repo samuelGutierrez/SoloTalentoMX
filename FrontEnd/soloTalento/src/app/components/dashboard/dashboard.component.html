@@ -1,0 +1,6 @@
+<div class="admin-parent" *ngIf="role === 1">
+    <p>{{ getRoleText() }}</p>
+</div>
+<div class="user-parent" *ngIf="role === 0">
+    <p>{{ getRoleText() }}</p>
+</div>

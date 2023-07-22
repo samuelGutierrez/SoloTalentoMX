@@ -7,5 +7,6 @@ namespace SoloTalentoMX.Api.BussinessLogic.Interfaces
     {
         Task<bool> CrearUsuario(UsuariosCreateDto dto);
         Task<Usuarios> ObtenerUsuario(UsuarioLoginDto login);
+        Task<UsuariosRolDto> ObtenerUsuarioxId(int id);
     }
 }

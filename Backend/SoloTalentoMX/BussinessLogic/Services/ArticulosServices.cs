@@ -1,6 +1,8 @@
-﻿using SoloTalentoMX.Api.BussinessLogic.Dto;
+﻿using Microsoft.EntityFrameworkCore;
+using SoloTalentoMX.Api.BussinessLogic.Dto;
 using SoloTalentoMX.Api.BussinessLogic.Interfaces;
 using SoloTalentoMX.Api.BussinessLogic.Utility;
+using SoloTalentoMX.Data.Data;
 using SoloTalentoMX.Data.Domain;
 using SoloTalentoMX.Data.Interfaces;
 using SoloTalentoMX.Data.Utility;
@@ -10,28 +12,18 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
     public class ArticulosServices : IArticulosServices
     {
         private readonly IGeneric<Articulos> _igArticulos;
+        private readonly Context _context;
 
-        public ArticulosServices(IGeneric<Articulos> igArticulos)
+        public ArticulosServices(IGeneric<Articulos> igArticulos, Context context)
         {
             _igArticulos = igArticulos;
+            _context = context;
         }
 
         public async Task<ReturnWebApi> RegistrarArticulos(ArticulosCreateDto dto)
         {
             try
             {
-                //byte[] imageData;
-
-                // Lee la imagen del archivo y conviértela a bytes
-                //using (var stream = new FileStream(dto.Imagen, FileMode.Open))
-                //{
-                //    using (var memoryStream = new MemoryStream())
-                //    {
-                //        stream.CopyTo(memoryStream);
-                //        imageData = memoryStream.ToArray();
-                //    }
-                //}
-
                 var saveData = new Articulos()
                 {
                     Codigo = dto.Codigo,
@@ -50,6 +42,35 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
             catch (CustomExceptions ex) { return new ReturnWebApi<Tiendas>(ex.CodeMessageClient, ex.Response, ex.Tags); }
         }
 
-        
+        public async Task<List<ArticulosDto>> ListaArticulos()
+        {
+            var listaArticulos = await (from a in _context.Articulos
+                                        select new ArticulosDto
+                                        {
+                                            Id = a.Id,
+                                            Codigo = a.Codigo,
+                                            Descripcion = a.Descripcion,
+                                            Imagen = a.Imagen,
+                                            Precio = a.Precio,
+                                            Stock = a.Stock,
+                                        }).ToListAsync();
+            return listaArticulos;
+        }
+
+        public async Task<ArticulosDto> ObtenerArticuloxId(int id)
+        {
+            var articulo = (from a in _context.Articulos
+                            where a.Id == id
+                            select new ArticulosDto
+                            {
+                                Id = a.Id,
+                                Codigo = a.Codigo,
+                                Descripcion = a.Descripcion,
+                                Imagen = a.Imagen,
+                                Precio = a.Precio,
+                                Stock = a.Stock,
+                            }).FirstOrDefault();
+            return articulo;
+        }
     }
 }

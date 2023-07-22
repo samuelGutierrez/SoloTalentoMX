@@ -1,15 +1,15 @@
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-}
+import { Articulos, EnviarArticulo } from "./articulos.interface";
 
 export interface Tienda {
+  id: number;
+  sucursal: string;
+  direccion: string;
+  imagen: string;
+}
+
+export interface AbastecerTienda {
   idTienda: number;
-  nombreTienda: string;
-  productos: Array<Product>;
+  articulos: Array<EnviarArticulo>;
 }
 
 export interface Tiendas {
