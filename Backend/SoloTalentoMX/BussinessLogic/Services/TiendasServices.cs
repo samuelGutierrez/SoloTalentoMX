@@ -20,23 +20,11 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
         {
             try
             {
-                byte[] imageData;
-
-                // Lee la imagen del archivo y conviértela a bytes
-                using (var stream = new FileStream(dto.Imagen, FileMode.Open))
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        stream.CopyTo(memoryStream);
-                        imageData = memoryStream.ToArray();
-                    }
-                }
-
                 var saveData = new Tiendas()
                 {
                     Sucursal = dto.Sucursal,
                     Direccion = dto.Direccion,
-                    Imagen = imageData
+                    Imagen = dto.Imagen
                 };
 
                 var exitoso = await _igTiendas.CreateAsync(saveData);

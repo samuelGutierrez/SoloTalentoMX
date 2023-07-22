@@ -10,7 +10,7 @@ namespace SoloTalentoMX.Data.Domain
         public int Id { get; set; }
         public string Sucursal { get; set; }
         public string Direccion { get; set; }
-        public byte[] Imagen { get; set; }
+        public string Imagen { get; set; }
 
         public virtual ICollection<ArticuloTienda> ArticulosTienda { get; set; }
     }

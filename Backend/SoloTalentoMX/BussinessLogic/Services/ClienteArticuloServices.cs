@@ -24,18 +24,24 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
             try
             {
                 List<ClienteArticulo> listaVentas = new List<ClienteArticulo>();
+                List<ArticuloTienda> listaInventario = new List<ArticuloTienda>();
 
-                for (int i = 0; i < dto.IdArticulo.Count; i++)
+                for (int i = 0; i < dto.Articulos.Count; i++)
                 {
-                    var articuloTienda = _igArticuloTienda.Search(x => x.IdTienda == dto.IdTienda && x.IdArticulo == dto.IdArticulo[i]).Id;
+                    var articuloTienda = _igArticuloTienda.Search(x => x.IdTienda == dto.IdTienda && x.IdArticulo == dto.Articulos[i].IdArticulo);
                     var saveData = new ClienteArticulo()
                     {
                         IdCliente = dto.IdCliente,
-                        IdArticuloTienda = articuloTienda,
-                        Date = DateTime.Now
+                        IdArticuloTienda = articuloTienda.Id,
+                        Date = DateTime.Now,
+                        CantidadCompra = dto.Articulos[i].Cantidad
                     };
 
                     listaVentas.Add(saveData);
+
+                    if ((articuloTienda.StockTienda -= dto.Articulos[i].Cantidad) < 0)
+                        return new ReturnWebApi<ArticuloTienda>(Enumerations.eMessagesClient.NoVenta, Enumerations.eResponse.Error);
+                    _igArticuloTienda.Modify(articuloTienda);
                 }
 
                 var exitoso = _igClienteArticulo.AddRange(listaVentas);

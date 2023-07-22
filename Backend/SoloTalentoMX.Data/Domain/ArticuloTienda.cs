@@ -11,7 +11,7 @@ namespace SoloTalentoMX.Data.Domain
         public int IdTienda { get; set; }
         public int IdArticulo { get; set; }
         public DateTime Date { get; set; }
-        public bool Activo { get; set; }
+        public int StockTienda { get; set; }
 
         [ForeignKey("IdTienda")]
         public virtual Tiendas Tiendas { get; set; }

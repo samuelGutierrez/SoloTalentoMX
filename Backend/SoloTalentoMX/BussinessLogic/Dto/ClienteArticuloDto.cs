@@ -12,6 +12,12 @@
     {
         public int IdCliente { get; set; }
         public int IdTienda { get; set; }
-        public List<int> IdArticulo { get; set; }
+        public List<ArticulosVenta> Articulos { get; set; }
+    }
+
+    public class ArticulosVenta
+    {
+        public int IdArticulo { get; set; }
+        public int Cantidad { get; set; }
     }
 }

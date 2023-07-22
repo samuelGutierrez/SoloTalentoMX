@@ -27,6 +27,9 @@
 
             LoginExitoso,
             ErrorLogin,
+
+            NoAbastecioTienda,
+            NoVenta,
         }
 
         public enum eTypeUser

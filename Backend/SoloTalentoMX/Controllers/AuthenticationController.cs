@@ -30,9 +30,9 @@ namespace SoloTalentoMX.Api.Controllers
             {
                 var keyBytes = Encoding.ASCII.GetBytes(_secretKey);
                 var claims = new ClaimsIdentity();
-                claims.AddClaim(new Claim(ClaimTypes.Name, oLogin.Clientes.Nombre));
+                //claims.AddClaim(new Claim(ClaimTypes.Name, oLogin..Nombre));
                 claims.AddClaim(new Claim(ClaimTypes.Email, oLogin.Correo));
-                claims.AddClaim(new Claim(ClaimTypes.Role, oLogin.TipoUsuarios.Descripcion));
+                claims.AddClaim(new Claim(ClaimTypes.Role, oLogin.IdTipoUsuario.ToString()));
 
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {

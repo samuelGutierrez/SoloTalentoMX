@@ -20,23 +20,23 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
         {
             try
             {
-                byte[] imageData;
+                //byte[] imageData;
 
                 // Lee la imagen del archivo y conviértela a bytes
-                using (var stream = new FileStream(dto.Imagen, FileMode.Open))
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        stream.CopyTo(memoryStream);
-                        imageData = memoryStream.ToArray();
-                    }
-                }
+                //using (var stream = new FileStream(dto.Imagen, FileMode.Open))
+                //{
+                //    using (var memoryStream = new MemoryStream())
+                //    {
+                //        stream.CopyTo(memoryStream);
+                //        imageData = memoryStream.ToArray();
+                //    }
+                //}
 
                 var saveData = new Articulos()
                 {
                     Codigo = dto.Codigo,
                     Descripcion = dto.Descripcion,
-                    Imagen = imageData,
+                    Imagen = dto.Imagen,
                     Precio = dto.Precio,
                     Stock = dto.Stock
                 };
@@ -49,5 +49,7 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
             }
             catch (CustomExceptions ex) { return new ReturnWebApi<Tiendas>(ex.CodeMessageClient, ex.Response, ex.Tags); }
         }
+
+        
     }
 }
