@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace SoloTalentoMX.Entity.Migrations
+namespace SoloTalentoMX.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitDb : Migration
@@ -35,7 +35,7 @@ namespace SoloTalentoMX.Entity.Migrations
                     Codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Precion = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Stock = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -95,6 +95,7 @@ namespace SoloTalentoMX.Entity.Migrations
                     IdTienda = table.Column<int>(type: "int", nullable: false),
                     IdArticulo = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StockTienda = table.Column<int>(type: "int", nullable: false),
                     ClientesId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -160,7 +161,8 @@ namespace SoloTalentoMX.Entity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     IdArticuloTienda = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CantidadCompra = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
