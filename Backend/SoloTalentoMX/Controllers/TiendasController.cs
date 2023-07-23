@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoloTalentoMX.Api.BussinessLogic.Dto;
 using SoloTalentoMX.Api.BussinessLogic.Interfaces;
-using SoloTalentoMX.Api.BussinessLogic.Services;
 using SoloTalentoMX.Api.BussinessLogic.Utility;
 
 namespace SoloTalentoMX.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TiendasController : ControllerBase
     {
         private readonly ITiendasServices _iTiendasServices;
@@ -63,6 +63,12 @@ namespace SoloTalentoMX.Api.Controllers
         public async Task<List<TiendasDto>> ListaTiendas()
         {
             return await _iTiendasServices.ListaTiendas();
+        }
+
+        [HttpGet("ArticulosTienda/{idTienda}")]
+        public async Task<List<ArticulosDto>> ArticulosTienda(int idTienda)
+        {
+            return await _iArticulosTiendaServices.ArticulosDeTienda(idTienda);
         }
     }
 }

@@ -59,10 +59,10 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
             return listaArticulos;
         }
 
-        public async Task<ArticulosDto> ObtenerArticuloxId(int id)
+        public async Task<ArticulosDto> ObtenerArticuloxId(string codigo)
         {
             var articulo = (from a in _context.Articulos
-                            where a.Id == id
+                            where a.Codigo == codigo
                             select new ArticulosDto
                             {
                                 Id = a.Id,
@@ -92,12 +92,12 @@ namespace SoloTalentoMX.Api.BussinessLogic.Services
             catch (CustomExceptions ex) { return new ReturnWebApi<Tiendas>(ex.CodeMessageClient, ex.Response, ex.Tags); }
         }
 
-        public async Task<ReturnWebApi> EliminarArticulo(int id)
+        public async Task<ReturnWebApi> EliminarArticulo(string codigo)
         {
             try
             {
-                var currentArticulo = _igArticulos.Search(x => x.Id == id);
-                var articuloTienda = _igArticuloTienda.List().Where(x => x.IdArticulo == id).ToList();
+                var currentArticulo = _igArticulos.Search(x => x.Codigo == codigo);
+                var articuloTienda = _igArticuloTienda.List().Where(x => x.IdArticulo == currentArticulo.Id).ToList();
 
                 if (articuloTienda.Count > 0 && currentArticulo.Stock > 0)
                     return new ReturnWebApi<Articulos>(Enumerations.eMessagesClient.NoEliminacion, Enumerations.eResponse.Warning);

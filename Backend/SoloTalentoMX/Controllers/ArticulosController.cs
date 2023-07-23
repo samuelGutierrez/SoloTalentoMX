@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoloTalentoMX.Api.BussinessLogic.Dto;
 using SoloTalentoMX.Api.BussinessLogic.Interfaces;
-using SoloTalentoMX.Api.BussinessLogic.Services;
 using SoloTalentoMX.Api.BussinessLogic.Utility;
 
 namespace SoloTalentoMX.Api.Controllers
@@ -32,16 +31,16 @@ namespace SoloTalentoMX.Api.Controllers
             return await _iArticulosServices.ActualizarArticulo(updateDto, id);
         }
 
-        [HttpDelete("EliminarArticulo/{id}")]
-        public async Task<ReturnWebApi> EliminarArticulo(int id)
+        [HttpDelete("EliminarArticulo/{codigo}")]
+        public async Task<ReturnWebApi> EliminarArticulo(string codigo)
         {
-            return await _iArticulosServices.EliminarArticulo(id);
+            return await _iArticulosServices.EliminarArticulo(codigo);
         }
 
-        [HttpGet("ObtenerArticuloxId/{id}")]
-        public async Task<ArticulosDto> ObtenerArticuloxId(int id)
+        [HttpGet("ObtenerArticuloxId/{codigo}")]
+        public async Task<ArticulosDto> ObtenerArticuloxId(string codigo)
         {
-            return await _iArticulosServices.ObtenerArticuloxId(id);
+            return await _iArticulosServices.ObtenerArticuloxId(codigo);
         }
 
         [HttpGet("ListaArticulos")]

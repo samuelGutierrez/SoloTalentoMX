@@ -1,5 +1,4 @@
-﻿using oloTalentoMX.Data.Interfaces;
-using SoloTalentoMX.Api.BussinessLogic.Dto;
+﻿using SoloTalentoMX.Api.BussinessLogic.Dto;
 using SoloTalentoMX.Api.BussinessLogic.Interfaces;
 using SoloTalentoMX.Api.BussinessLogic.Utility;
 using SoloTalentoMX.Data.Domain;
