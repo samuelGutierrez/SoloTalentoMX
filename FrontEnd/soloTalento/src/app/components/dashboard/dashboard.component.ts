@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { CrearArticulo } from "src/app/models/articulos.interface";
+import { ArticulosService } from "src/app/services/articulos.service";
 import { AuthService } from "src/app/services/auth.service";
 import { UserStoreService } from "src/app/services/user-store.service";
 import { UsuarioService } from "src/app/services/usuario.service";
@@ -18,7 +20,14 @@ export class DashboardComponent implements OnInit {
   public dataLoaded: boolean = false;
 
   public fullName: string = "";
-  constructor(private user: UsuarioService, private auth: AuthService, private userStore: UserStoreService) { }
+  // constructor(private user: UsuarioService, private auth: AuthService, private userStore: UserStoreService) { }
+
+  constructor(
+    private user: UsuarioService,
+    private auth: AuthService,
+    private userStore: UserStoreService,
+    private articulosService: ArticulosService // Importar el servicio ArticulosService
+  ) {}
 
   dataStore = {
     sucursal: '',
@@ -78,11 +87,59 @@ export class DashboardComponent implements OnInit {
   }
 
   saveDataTienda() {
-    console.log('Form Data:', this.dataStore);
+    const nuevoArticulo: CrearArticulo = {
+      Codigo: this.dataArticle.codigo,
+      Descripcion: this.dataArticle.descripcion,
+      Imagen: this.dataArticle.imagen,
+      Precio: this.dataArticle.precio,
+      Stock: this.dataArticle.stock
+    };
+
+    this.articulosService.crearArticulo(nuevoArticulo).subscribe(
+      (response) => {
+        console.log('Artículo creado exitosamente', response);
+      },
+      (error) => {
+        console.error('Error al crear el artículo:', error);
+      }
+    );
   }
   saveArticle() {
-    console.log('Form Data:', this.dataArticle);
+    const nuevoArticulo: CrearArticulo = {
+      Codigo: this.dataArticle.codigo,
+      Descripcion: this.dataArticle.descripcion,
+      Imagen: this.dataArticle.imagen,
+      Precio: this.dataArticle.precio,
+      Stock: this.dataArticle.stock
+    };
+
+    this.articulosService.crearArticulo(nuevoArticulo).subscribe(
+      (response) => {
+        console.log('Artículo creado exitosamente', response);
+      },
+      (error) => {
+        console.error('Error al crear el artículo:', error);
+      }
+    );
   }
+
+  buscarProducto(codigoInput: any) {
+    if (codigoInput === "") {
+      alert("Necesitamos el código");
+    } else {
+      const codigo = codigoInput;
+  
+      this.articulosService.articulo(codigo).subscribe(
+        (response) => {
+          console.log('Artículo encontrado:', response);
+        },
+        (error) => {
+          console.error('Error al buscar el artículo:', error);
+        }
+      );
+    }
+  }
+
   saveFullOut() {
     console.log('Form Data:', this.dataFullOut);
   }

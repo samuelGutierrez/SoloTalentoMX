@@ -16,7 +16,7 @@ export interface CrearArticulo {
     Codigo: string;
     Descripcion: string;
     Imagen: string;
-    Precio: BigInt;
+    Precio: number;
     Stock: number;
 }
 
