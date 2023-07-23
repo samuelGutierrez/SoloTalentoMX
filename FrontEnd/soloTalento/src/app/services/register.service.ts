@@ -7,7 +7,7 @@ import { Registro } from "../models/register.interface";
 @Injectable({
     providedIn: 'root',
 })
-export class UsuarioService {
+export class RegisterService {
     private baseUrl: string = `${environment.APIURL}/api/Cliente`;
 
     constructor(private http: HttpClient, private router: Router) { }

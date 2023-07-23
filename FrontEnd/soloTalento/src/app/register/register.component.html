@@ -1,0 +1,11 @@
+<div>
+    <form (ngSubmit)="saveRegister()">
+        <input name="nombre"  placeholder="Nombre" [(ngModel)]="dataRegister.nombre" />
+        <input name="apellido" type="text" placeholder="Apellido" [(ngModel)]="dataRegister.apellido" />
+        <input name="direccion" type="text" placeholder="Url de la direccion" [(ngModel)]="dataRegister.direccion" />
+        <input name="correo" type="text" placeholder="correo" [(ngModel)]="dataRegister.correo" />
+        <input name="password" type="password" placeholder="password" [(ngModel)]="dataRegister.password" />
+        <button type="submit">Enviar</button>
+        <button type="button"><a href="/login">Volver</a></button>
+      </form>
+</div>

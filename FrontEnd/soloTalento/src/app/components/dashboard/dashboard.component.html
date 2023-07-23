@@ -1,6 +1,60 @@
-<div class="admin-parent" *ngIf="role === 1">
-    <p>{{ getRoleText() }}</p>
-</div>
-<div class="user-parent" *ngIf="role === 0">
-    <p>{{ getRoleText() }}</p>
+<div *ngIf="dataLoaded">
+    <div class="parent-body-admin" *ngIf="role === '1'">
+        <div class="parent-body-admin">
+            <div class="admin-selection">
+                <h2>Hola Nombre</h2>
+                <p>¿Qué quieres hacer hoy?</p>
+                <button (click)="openCreateStore()">Crear tienda</button>
+                <button (click)="openModalCreateProduct()">Crear Articulo</button>
+                <button (click)="openModal()">Abastecer tienda</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal" *ngIf="showModalCreateStore">
+        <div class="modal-content">
+            <form (ngSubmit)="saveDataTienda()">
+                <input name="sucursal" placeholder="Sucursal" [(ngModel)]="dataStore.sucursal" />
+                <input name="direccion" placeholder="Dirección" [(ngModel)]="dataStore.direccion" />
+                <input name="imagen" placeholder="Imagen" [(ngModel)]="dataStore.imagen" />
+                <button type="submit">Enviar</button>
+                <button type="button" (click)="closeModal()">Volver</button>
+              </form>
+        </div>
+    </div>
+    <div class="modal" *ngIf="showModalCreateProduct">
+        <div class="modal-content">
+            <form (ngSubmit)="saveArticle()">
+                <input name="codigo"  placeholder="Código" [(ngModel)]="dataArticle.codigo" />
+                <input name="descripcion" type="text" placeholder="Descripción" [(ngModel)]="dataArticle.descripcion" />
+                <input name="imagen" type="text" placeholder="Url de la Imagen" [(ngModel)]="dataArticle.imagen" />
+                <input name="precio" type="number" placeholder="Precio" [(ngModel)]="dataArticle.precio" />
+                <input name="stock" type="number" placeholder="Stock" [(ngModel)]="dataArticle.stock" />
+                <button type="submit">Enviar</button>
+                <button type="button" (click)="buscarProducto(dataArticle.codigo)">Buscar</button>
+                <button type="button" (click)="closeModal()">Volver</button>
+              </form>
+        </div>
+    </div>
+    <div class="modal" *ngIf="showModalFillOut">
+        <div class="modal-content">
+            <form (ngSubmit)="saveFullOut()">
+                <h2>Registro</h2>
+                <input name="nombre" placeholder="Nombre" [(ngModel)]="dataFullOut.nombre" />
+                <input name="apellido" placeholder="Apellido" [(ngModel)]="dataFullOut.apellido" />
+                <input name="direccion" placeholder="Dirección" [(ngModel)]="dataFullOut.direccion" />
+                <input name="correo" placeholder="Correo" [(ngModel)]="dataFullOut.correo" />
+                <input name="password" type="password" placeholder="Contraseña" [(ngModel)]="dataFullOut.password" />
+                <button type="submit">Registrarse</button>
+                <button type="button" (click)="closeModal()">Volver</button>
+              </form>
+        </div>
+    </div>
+
+
+    <div class="user-parent" *ngIf="role === '2'">
+        <p>User</p>
+    </div>
 </div>
