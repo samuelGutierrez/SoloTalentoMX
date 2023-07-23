@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoloTalentoMX.Api.BussinessLogic.Dto;
 using SoloTalentoMX.Api.BussinessLogic.Interfaces;
@@ -9,7 +10,7 @@ namespace SoloTalentoMX.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ArticulosController : ControllerBase
     {
         private readonly IArticulosServices _iArticulosServices;

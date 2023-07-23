@@ -1,5 +1,5 @@
 <div *ngIf="dataLoaded">
-    <div class="parent-body-admin" *ngIf="role === '2'">
+    <div class="parent-body-admin" *ngIf="role === '1'">
         <div class="parent-body-admin">
             <div class="admin-selection">
                 <h2>Hola Nombre</h2>
@@ -29,9 +29,11 @@
             <form (ngSubmit)="saveArticle()">
                 <input name="codigo"  placeholder="Código" [(ngModel)]="dataArticle.codigo" />
                 <input name="descripcion" type="text" placeholder="Descripción" [(ngModel)]="dataArticle.descripcion" />
+                <input name="imagen" type="text" placeholder="Url de la Imagen" [(ngModel)]="dataArticle.imagen" />
                 <input name="precio" type="number" placeholder="Precio" [(ngModel)]="dataArticle.precio" />
                 <input name="stock" type="number" placeholder="Stock" [(ngModel)]="dataArticle.stock" />
                 <button type="submit">Enviar</button>
+                <button type="button" (click)="buscarProducto(dataArticle.codigo)">Buscar</button>
                 <button type="button" (click)="closeModal()">Volver</button>
               </form>
         </div>
@@ -52,7 +54,7 @@
     </div>
 
 
-    <div class="user-parent" *ngIf="role === '1'">
+    <div class="user-parent" *ngIf="role === '2'">
         <p>User</p>
     </div>
 </div>

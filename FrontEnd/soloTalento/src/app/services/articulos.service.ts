@@ -1,16 +1,22 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { environment } from "src/enviroment";
-import { ActualizarArticulo, CrearArticulo } from "../models/articulos.interface";
+import { CrearArticulo, ActualizarArticulo } from "../models/articulos.interface";
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class ArticulosService {
     private baseUrl: string = `${environment.APIURL}/api/Articulos`;
+    private token: string | null;
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private router: Router) {
+        this.token = localStorage.getItem('token');
+    }
+
+
 
     listArticulos() {
         return this.http.get<any>(`${this.baseUrl}/ListaArticulos`);
@@ -21,7 +27,10 @@ export class ArticulosService {
     }
 
     crearArticulo(post: CrearArticulo) {
-        return this.http.post<any>(`${this.baseUrl}/RegistrarArticulo`, post);
+        const headers = new HttpHeaders({
+            'Authorization': 'Bearer ' + this.token
+        });
+        return this.http.post<any>(`${this.baseUrl}/RegistrarArticulo`, post, { headers });
     }
 
     actualizarArticulo(idArticulo: number, put: ActualizarArticulo) {
