@@ -15,8 +15,10 @@
         public string Imagen { get; set; }
     }
 
-    public class AbastecerTiendaDto
+    public class TiendaUpdateDto
     {
-        public int MyProperty { get; set; }
+        public string Sucursal { get; set; }
+        public string Direccion { get; set; }
+        public string Imagen { get; set; }
     }
 }

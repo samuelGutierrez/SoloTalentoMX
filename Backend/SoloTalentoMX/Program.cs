@@ -68,11 +68,11 @@ builder.Services.AddDbContext<Context>(options =>
 var app = builder.Build();
 
 // Dependency Injection and migration configure Database
-using (var scope = app.Services.CreateScope())
-{
-    var dataContext = scope.ServiceProvider.GetRequiredService<Context>();
-    dataContext.Database.Migrate();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var dataContext = scope.ServiceProvider.GetRequiredService<Context>();
+//    dataContext.Database.Migrate();
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
